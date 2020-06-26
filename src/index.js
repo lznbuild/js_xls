@@ -27,32 +27,12 @@ input.onchange = function (e) {
     for (var sheet in workbook.Sheets) {
       if (workbook.Sheets.hasOwnProperty(sheet)) {
         fromTo = workbook.Sheets[sheet]['!ref'];
-        console.log(fromTo);
         persons = persons.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
         // break; // 如果只取第一张表，就取消注释这行
       }
     }
-
+    //拿到的数据
     console.log(persons, '123');
-    const fanObj = {};
-    const enObj = {};
-    persons.forEach((item, index) => {
-      const pinyinStr = pinyin.convertToPinyin(item["繁體"], "-",true)
-
-
-      const key = `${PRESTR}.${pinyinStr[0]}${pinyinStr.match(/(?<=-)./g) ? pinyinStr.match(/(?<=-)./g).join(""):''}`
-        
-
-      fanObj[key] = item["繁體"]
-      enObj[key] = item["英文"]
-    })
-
-
-    console.log(JSON.stringify(fanObj, null, 4), 'fanobj');
-
-    console.log(JSON.stringify(enObj, null, 4), 'fanobj');
-
-
 
   };
 
@@ -60,5 +40,5 @@ input.onchange = function (e) {
   fileReader.readAsBinaryString(files[0]);
 }
 
-console.log(); 
+
 
